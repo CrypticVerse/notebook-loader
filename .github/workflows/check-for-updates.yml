@@ -102,7 +102,7 @@ jobs:
           MC_VERSION: ${{ vars.LATEST_MC_VERSION }}
 
       - name: Commit artifacts to meta repo
-        uses: EndBug/add-and-commit-action@v9
+        uses: EndBug/add-and-commit@v9
         with:
           add: ". --force"
           author_name: CrypticVerse
