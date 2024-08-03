@@ -35,6 +35,7 @@ abstract class GenerateLauncherJsonTask extends DefaultTask {
 		versionJsonFile.set(project.layout.file(project.provider {
 			new File("${project.rootDir}/meta/versions/${versionName.get()}-${minecraftVersion.get()}.json")
 		}))
+		println("${project.rootDir}/meta/versions/${versionName.get()}-${minecraftVersion.get()}.json")
 		loaderLibraryFile.set(project.layout.file(project.provider {
 			new File("libraries/com/bookkeepersmc/notebook-loader/${project.version.toString()}/notebook-loader-${project.version.toString()}.jar")
 		}))
