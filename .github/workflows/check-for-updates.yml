@@ -103,7 +103,7 @@ jobs:
       - name: Commit artifacts to m2 repo
         uses: EndBug/add-and-commit@v9.1.4
         with:
-          add: './versions/'
+          add: '.'
           author_name: CrypticVerse
           cwd: "./meta/"
           message: "New MC Launcher Json"
