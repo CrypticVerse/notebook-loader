@@ -108,3 +108,5 @@ jobs:
           author_name: CrypticVerse
           cwd: "./meta/"
           message: "New MC Launcher Json"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
