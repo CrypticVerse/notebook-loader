@@ -103,10 +103,10 @@ jobs:
 
       - name: Commit artifacts to meta repo
         uses: EndBug/add-and-commit@v9
+        working-directory: meta
         with:
           add: "*.json"
           author_name: CrypticVerse
-          cwd: "./meta/"
           message: "New MC Launcher Json"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
