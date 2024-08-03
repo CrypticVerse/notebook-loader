@@ -102,7 +102,9 @@ jobs:
           MC_VERSION: ${{ vars.LATEST_MC_VERSION }}
 
       - name: Commit artifacts to meta repo
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: EndBug/add-and-commit-action@v9
         with:
-          repository: "meta"
-          commit_message: "New MC Launcher Json"
+          add: ". --force"
+          author_name: CrypticVerse
+          cwd: "./meta/"
+          message: "New MC Launcher Json"
