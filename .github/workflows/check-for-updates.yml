@@ -75,3 +75,35 @@ jobs:
           value: "\"${{ fromJson(needs.check.outputs.new_version).version }}\""
         env:
           GITHUB_TOKEN: ${{ secrets.VARIABLES_TOKEN }}
+
+      - name: Checkout Resources
+        uses: actions/checkout@v4
+      - name: Checkout M2 Repo
+        uses: actions/checkout@v4
+        with:
+          repository: 'BookkeepersMC/meta'
+          path: './meta/'
+          ref: 'master'
+          token: ${{ secrets.SECRET_TOKEN }}
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+         distribution: temurin
+         java-version: 21
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Generate Installer JSON
+        run: ./gradlew generateInstallerJson --stacktrace
+        env:
+          MC_VERSION: ${{ vars.LATEST_MC_VERSION }}
+
+      - name: Commit artifacts to m2 repo
+        uses: EndBug/add-and-commit@v9.1.4
+        with:
+          add: './versions/'
+          author_name: CrypticVerse
+          cwd: "./meta/"
+          message: "New MC Launcher Json"
