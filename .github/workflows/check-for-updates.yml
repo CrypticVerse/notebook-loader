@@ -65,7 +65,7 @@ jobs:
           name: LATEST_MC_VERSION
           value: "\"${{ fromJson(needs.check.outputs.new_version).version }}\""
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.VARIABLES_TOKEN }}
       - name: Store Latest Version
         if: ${{ !fromJson(needs.check.outputs.new_version).april }}
         uses: octokit/request-action@v2.3.0
@@ -75,7 +75,7 @@ jobs:
           name: LATEST_MAINLINE_VERSION
           value: "\"${{ fromJson(needs.check.outputs.new_version).version }}\""
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.VARIABLES_TOKEN }}
 
       - name: Checkout Resources
         uses: actions/checkout@v4
