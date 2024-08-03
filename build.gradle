@@ -23,6 +23,7 @@ base {
 }
 
 def ENV = System.getenv()
+println("${project.rootDir}/meta/versions/${versionName.get()}-${minecraftVersion.get()}.json")
 
 allprojects {
 	apply plugin: 'java-library'
