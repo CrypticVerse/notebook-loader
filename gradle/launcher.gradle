@@ -3,6 +3,7 @@ import groovy.json.JsonSlurper
 
 // A task to install the development version of Fabric Loader to the Minecraft launcher
 tasks.register("generateLauncherJson", GenerateLauncherJsonTask) {
+	println("${project.rootDir}/meta/versions/${versionName.get()}-${minecraftVersion.get()}.json")
 	installerJson = file("src/main/resources/fabric-installer.json")
 	loaderJar = proguardJar.outputs.files.singleFile
 	dependsOn proguardJar
@@ -35,7 +36,6 @@ abstract class GenerateLauncherJsonTask extends DefaultTask {
 		versionJsonFile.set(project.layout.file(project.provider {
 			new File("${project.rootDir}/meta/versions/${versionName.get()}-${minecraftVersion.get()}.json")
 		}))
-		println("${project.rootDir}/meta/versions/${versionName.get()}-${minecraftVersion.get()}.json")
 		loaderLibraryFile.set(project.layout.file(project.provider {
 			new File("libraries/com/bookkeepersmc/notebook-loader/${project.version.toString()}/notebook-loader-${project.version.toString()}.jar")
 		}))
