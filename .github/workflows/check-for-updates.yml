@@ -82,10 +82,10 @@ jobs:
       - name: Checkout M2 Repo
         uses: actions/checkout@v4
         with:
-          repository: 'BookkeepersMC/meta'
-          path: './meta/'
-          ref: 'master'
-          token: ${{ secrets.SECRET_TOKEN }}
+          repository: BookkeepersMC/meta
+          path: meta
+          ref: master
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -101,10 +101,8 @@ jobs:
         env:
           MC_VERSION: ${{ vars.LATEST_MC_VERSION }}
 
-      - name: Commit artifacts to m2 repo
-        uses: EndBug/add-and-commit@v9.1.4
+      - name: Commit artifacts to meta repo
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          add: '.'
-          author_name: CrypticVerse
-          cwd: "./meta/"
-          message: "New MC Launcher Json"
+          repository: "meta"
+          commit_message: "New MC Launcher Json"
