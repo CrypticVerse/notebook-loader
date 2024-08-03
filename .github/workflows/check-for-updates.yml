@@ -79,13 +79,13 @@ jobs:
 
       - name: Checkout Resources
         uses: actions/checkout@v4
-      - name: Checkout M2 Repo
-        uses: actions/checkout@v4
-        with:
-          repository: BookkeepersMC/meta
-          path: meta
-          ref: master
-          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Test
+        shell: bash
+        run: |
+          git config --global user.name CrypticVerse
+          git config --global user.email CrypticVerseMC@gmail.com
+          git clone https://github.com/BookkeepersMC/meta.git
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -97,16 +97,14 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
 
       - name: Generate Installer JSON
-        run: ./gradlew build generateInstallerJson --stacktrace
+        run: ./gradlew generateInstallerJson --stacktrace
         env:
           MC_VERSION: ${{ vars.LATEST_MC_VERSION }}
 
-      - name: Commit artifacts to meta repo
-        uses: EndBug/add-and-commit@v9
-        with:
-          add: "*.json"
-          working-directory: meta
-          author_name: CrypticVerse
-          message: "New MC Launcher Json"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit
+        shell: bash
+        run: |
+          cd ./meta
+          git add . --force
+          git commit -m "New Installer JSON"
+          git push --force
