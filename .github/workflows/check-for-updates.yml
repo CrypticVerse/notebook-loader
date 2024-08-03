@@ -97,15 +97,15 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
 
       - name: Generate Installer JSON
-        run: ./gradlew generateInstallerJson --stacktrace
+        run: ./gradlew build generateInstallerJson --stacktrace
         env:
           MC_VERSION: ${{ vars.LATEST_MC_VERSION }}
 
       - name: Commit artifacts to meta repo
         uses: EndBug/add-and-commit@v9
-        working-directory: meta
         with:
           add: "*.json"
+          working-directory: meta
           author_name: CrypticVerse
           message: "New MC Launcher Json"
         env:
