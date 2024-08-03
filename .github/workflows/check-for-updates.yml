@@ -104,7 +104,7 @@ jobs:
       - name: Commit artifacts to meta repo
         uses: EndBug/add-and-commit@v9
         with:
-          add: ". --force"
+          add: "versions/*"
           author_name: CrypticVerse
           cwd: "./meta/"
           message: "New MC Launcher Json"
